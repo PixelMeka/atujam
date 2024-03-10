@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Hit
+  - Player3
+  - Clock
+  - Attack
+  - SandBoom
+  - Light
+  - Hide
+  - RayRed
+  - EnemyOrb
+  - BossCollider
+  - Hourglass
   layers:
   - Default
   - TransparentFX
