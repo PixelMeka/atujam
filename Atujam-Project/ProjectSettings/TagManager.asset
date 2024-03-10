@@ -16,6 +16,7 @@ TagManager:
   - EnemyOrb
   - BossCollider
   - Hourglass
+  - HourglassCollectTag
   layers:
   - Default
   - TransparentFX

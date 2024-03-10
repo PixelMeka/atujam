@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
 {
     public float timeRemaining = 100;
     public float timeRemainingInt;
-    GameObject player;
+    [SerializeField] GameObject player;
     public bool pleaseStop = false;
     public float stopTimer = 1;
     public bool pleaseStop2 = false;
@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         timeText = timeText.GetComponent<TextMeshProUGUI>();
-        player = GameObject.FindWithTag("Player");
+        //player = GameObject.FindWithTag("Player");
 
         bossAnim = boss.GetComponentInChildren<Animator>();
     }

@@ -1,32 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputActions playerInputActions;
+    [SerializeField] private PlayerInputActions playerInputActions;
+    private PlayerInputActions.OnFootActions onFoot;
+    private Player player;
 
 
-    private void Awake()
+    void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
+        onFoot = playerInputActions.OnFoot;
+        player = GetComponent<Player>();
+
+        onFoot.Jump.performed += ctx => player.Jump();
+    }
+    
+
+    // Update is called once per frame
+    void Update()
+    {
+        player.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        player.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
-
-    public Vector2 GetMovementVectorNormalized()
+    private void OnEnable()
     {
-        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-
-        inputVector = inputVector.normalized;
-
-        return inputVector;
+        onFoot.Enable();
     }
 
-    public Vector2 GetMouseInput()
+    private void OnDisable()
     {
-        Vector2 inputVector = playerInputActions.Player.LookAround.ReadValue<Vector2>();
-
-        return inputVector;
+        onFoot.Disable();
     }
 }

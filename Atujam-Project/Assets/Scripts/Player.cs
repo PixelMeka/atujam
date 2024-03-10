@@ -1,58 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameInput gameInput;
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float cameraSpeed = 5f;
+    private GameInput gameInput;
 
-    [SerializeField] private Camera playerCamera;
-    // Start is called before the first frame update
+    // Movement stuff
+    private Vector3 playerVelocity;
+    [SerializeField] private float speed;
+    private CharacterController characterController;
+    private bool isGrounded;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private float gravity = -9.8f;
+
+    // Rotation stuff
+    [SerializeField] private Camera cam;
+    private float rotationX = 0f;
+    [SerializeField] private float mouseSensitivity = 30f;
+
+
     void Start()
     {
-        
+        characterController = GetComponent<CharacterController>();
+        gameInput = GetComponent<GameInput>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        ProcessMove();
-        ProcessLookAround();
+        isGrounded = characterController.isGrounded;
+    }
+
+    public void ProcessMove(Vector2 input)
+    {
+        
+        Vector3 moveDirection = Vector3.zero;
+        moveDirection.x = input.x;
+        moveDirection.z = input.y;
+        characterController.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+
+        playerVelocity.y += gravity * Time.deltaTime;
+
+        if (isGrounded && playerVelocity.y < 0)
+            playerVelocity.y = -2f;
+
+        characterController.Move(playerVelocity * Time.deltaTime);
+
+    }
+
+    public void ProcessLook(Vector2 input)
+    {
+        float mouseX = input.x;
+        float mouseY = input.y;
+
+        rotationX -= mouseY * Time.deltaTime * mouseSensitivity;
+        rotationX = Mathf.Clamp(rotationX, -80f, 80f);
+
+        cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+        transform.Rotate(Vector2.up * (mouseX * Time.deltaTime) * mouseSensitivity);
     }
 
 
-
-
-    private void ProcessMove()
+    public void Jump()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+        if (isGrounded)
+        {
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * gravity * -jumpHeight);
+        }
 
-        Vector3 newMoveDirection = transform.TransformDirection(moveDirection);
-
-
-        float moveDistance = moveSpeed * Time.deltaTime;
-        
-       // Debug.DrawRay(transform.position, transform.position + Vector3.up * playerHeight, Color.red);
-
-        bool canMove = !Physics.Raycast(
-            transform.position, transform.TransformDirection(Vector3.forward), moveDistance);
-
-
-        this.transform.position += newMoveDirection * moveDistance;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward));
-    }
-
-
-    private void ProcessLookAround()
-    {
-        Vector2 mouseInput = gameInput.GetMouseInput();
-
-        
-        playerCamera.transform.eulerAngles += new Vector3(-mouseInput.y, 0, 0) * cameraSpeed * Time.deltaTime;
-        this.transform.eulerAngles += new Vector3(0, mouseInput.x, 0) * cameraSpeed * Time.deltaTime;
     }
 }
