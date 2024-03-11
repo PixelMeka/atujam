@@ -43,6 +43,12 @@ public class Timer : MonoBehaviour
     public GameObject tpAnim2;
     public GameObject level3map;
 
+    public GameObject level1;
+    public GameObject level2music;
+    public GameObject level3music;
+    public AudioSource level4music;
+    public AudioSource level4musicloop;
+
     void Start()
     {
         timeText = timeText.GetComponent<TextMeshProUGUI>();
@@ -75,6 +81,7 @@ public class Timer : MonoBehaviour
         {
             timeText.enabled = false;
             bossAnomalies.SetActive(false);
+            level4musicloop.Stop();
         }
 
         if (player.GetComponent<PlayerStats>().hit == true && player.GetComponent<PlayerStats>().hitStopper == false)
@@ -195,6 +202,7 @@ public class Timer : MonoBehaviour
         if (player2.GetComponent<Level2Collision>().endLevel2 == true)
         {
             player2.SetActive(false);
+            level1.SetActive(false);
             level3map.SetActive(true);
             level3 = true;
         }

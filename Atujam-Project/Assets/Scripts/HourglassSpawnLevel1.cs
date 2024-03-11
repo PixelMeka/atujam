@@ -18,6 +18,8 @@ public class HourglassSpawnLevel1 : MonoBehaviour
     private GameObject currentObject;
     private int hourglassCounter = 0;
 
+    public GameObject level1;
+
     void Start()
     {
         SpawnObject();

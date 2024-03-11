@@ -19,6 +19,8 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject playerHitAnim;
     public GameObject playerTpAnim;
 
+    public GameObject level4;
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +55,7 @@ public class NewBehaviourScript : MonoBehaviour
                 player3Boss.SetActive(true);
                 bossFinal.SetActive(true);
                 bossAnomalies.SetActive(true);
+                level4.SetActive(true);
 
                 if (tpTime2 <= 0)
                 {

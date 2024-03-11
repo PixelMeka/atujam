@@ -29,6 +29,8 @@ public class Player3 : MonoBehaviour
     float xAxisClamp = 0;
     public GameObject playerMid;
 
+    public AudioSource audioSwing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,7 @@ public class Player3 : MonoBehaviour
                 meleeSwing2.SetActive(true);
             }
 
+            audioSwing.Play();
             attackCol.SetActive(true);
             attacking = true;
             attackTime = 0.5f;

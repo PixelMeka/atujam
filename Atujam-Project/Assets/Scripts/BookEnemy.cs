@@ -11,6 +11,7 @@ public class BookEnemy : MonoBehaviour
     private NavMeshAgent agent;
 
     public GameObject explosion;
+    public AudioSource attackAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class BookEnemy : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            attackAudio.Play();
             anim.SetTrigger("Attack");
             hitCol.SetActive(true);
         }
@@ -47,6 +49,7 @@ public class BookEnemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            attackAudio.Play();
             anim.SetTrigger("Attack");
             hitCol.SetActive(true);
         }
@@ -56,6 +59,7 @@ public class BookEnemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            attackAudio.Play();
             anim.SetTrigger("Attack");
             hitCol.SetActive(false);
         }
