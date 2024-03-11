@@ -39,8 +39,10 @@ public class HourglassSpawnLevel1 : MonoBehaviour
     void Update()
     {
         //Bir sonraki levela geç
-        if (hourglassCounter > 10)
-            throw NotImplementedException();
+        if (hourglassCounter >= 5)
+        {
+
+        }
     }
 
 }

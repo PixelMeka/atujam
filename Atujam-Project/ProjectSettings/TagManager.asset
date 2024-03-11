@@ -17,6 +17,8 @@ TagManager:
   - BossCollider
   - Hourglass
   - HourglassCollectTag
+  - Anomaly
+  - Anomaly2
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,8 @@ public class Timer : MonoBehaviour
 {
     public float timeRemaining = 100;
     public float timeRemainingInt;
-    [SerializeField] GameObject player;
+    public GameObject player;
+    public GameObject playerbaby;
     public bool pleaseStop = false;
     public float stopTimer = 1;
     public bool pleaseStop2 = false;
@@ -20,6 +21,7 @@ public class Timer : MonoBehaviour
     public GameObject boss;
     public GameObject bossShield;
     public GameObject bossCollider;
+    public GameObject bossAnomalies;
     Animator bossAnim;
     public bool bossDead = false;
 
@@ -32,7 +34,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         timeText = timeText.GetComponent<TextMeshProUGUI>();
-        //player = GameObject.FindWithTag("Player");
+        //player = GameObject.FindWithTag("Player3");
 
         bossAnim = boss.GetComponentInChildren<Animator>();
     }
@@ -48,14 +50,24 @@ public class Timer : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
         }
-        else
+
+        if(timeRemaining <= 0)
         {
             timeRemaining = 0;
+
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         }
 
-        if(player.GetComponent<PlayerStats>().hit == true && player.GetComponent<PlayerStats>().hitStopper == false)
+        if(bossDead)
         {
-            if(pleaseStop == false)
+            timeText.enabled = false;
+            bossAnomalies.SetActive(false);
+        }
+
+        if (player.GetComponent<PlayerStats>().hit == true && player.GetComponent<PlayerStats>().hitStopper == false)
+        {
+            if (pleaseStop == false)
             {
                 timeRemaining -= 5;
                 stopTimer = 1;

@@ -19,16 +19,20 @@ public class Player : MonoBehaviour
     private float rotationX = 0f;
     [SerializeField] private float mouseSensitivity = 30f;
 
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         gameInput = GetComponent<GameInput>();
+
+        // To keep the cursor locked
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
         isGrounded = characterController.isGrounded;
+
     }
 
     public void ProcessMove(Vector2 input)

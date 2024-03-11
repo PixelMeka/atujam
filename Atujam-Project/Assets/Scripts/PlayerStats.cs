@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
     public bool hit = false;
     public bool hit2 = false;
+    public bool end = false;
+    public float endTimer = 3f;
     public GameObject hitAnim;
     public GameObject hitAnim2;
+    public GameObject hitAnim3;
 
     public GameObject player;
     public GameObject spawnPoint3;
@@ -73,6 +77,20 @@ public class PlayerStats : MonoBehaviour
                 hitAnim.SetActive(false);
             }
         }
+
+        if(end)
+        {
+            endTimer -= Time.deltaTime;
+
+            hitAnim.SetActive(true);
+            hitAnim3.SetActive(true);
+
+            if (endTimer <= 0)
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,6 +111,21 @@ public class PlayerStats : MonoBehaviour
             player.transform.position = spawnPoint3.transform.position;
             hit = true;
         }
+
+        if (other.tag == "Anomaly")
+        {
+            Time.timeScale = 0.5f;
+        }
+
+        if (other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.5f;
+        }
+
+        if (other.tag == "Hourglass")
+        {
+            end = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -105,6 +138,24 @@ public class PlayerStats : MonoBehaviour
         if (other.tag == "RayRed" && hitStopper == false)
         {
             hit = true;
+        }
+
+        if (other.tag == "Anomaly")
+        {
+            Time.timeScale = 0.3f;
+        }
+
+        if (other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.7f;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Anomaly" || other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.0f;
         }
     }
 }

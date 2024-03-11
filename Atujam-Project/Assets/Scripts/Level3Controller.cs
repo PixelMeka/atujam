@@ -10,6 +10,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject player3;
     public GameObject player3Boss;
     public GameObject bossFinal;
+    public GameObject bossAnomalies;
 
     public GameObject[] sands;
 
@@ -51,6 +52,7 @@ public class NewBehaviourScript : MonoBehaviour
                 player3.SetActive(false);
                 player3Boss.SetActive(true);
                 bossFinal.SetActive(true);
+                bossAnomalies.SetActive(true);
 
                 if (tpTime2 <= 0)
                 {
