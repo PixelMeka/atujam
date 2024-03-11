@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     public float timeRemainingInt;
     public GameObject player;
     public GameObject playerbaby;
+    public GameObject player2;
     public bool pleaseStop = false;
     public float stopTimer = 1;
     public bool pleaseStop2 = false;
@@ -30,6 +31,17 @@ public class Timer : MonoBehaviour
     public float orbTimer = 15f;
 
     public TMP_Text timeText;
+
+    public bool done1 = false;
+    public bool done2 = false;
+    public bool done3 = false;
+
+    //Level 3 start
+    public bool level3 = false;
+    public float level3Timer = 1f;
+    public GameObject tpAnim;
+    public GameObject tpAnim2;
+    public GameObject level3map;
 
     void Start()
     {
@@ -146,6 +158,56 @@ public class Timer : MonoBehaviour
         {
             bossAnim.SetBool("Dead", true);
             bossDead = true;
+        }
+
+        //For Level 2
+        if(player2.GetComponent<Level2Collision>().one == true && !done1)
+        {
+            timeRemaining += 5;
+            done1 = true;
+        }
+        if (player2.GetComponent<Level2Collision>().two == true && !done1)
+        {
+            timeRemaining -= 10;
+            done1 = true;
+        }
+        if (player2.GetComponent<Level2Collision>().three == true && !done2)
+        {
+            timeRemaining += 15;
+            done2 = true;
+        }
+        if (player2.GetComponent<Level2Collision>().four == true && !done2)
+        {
+            timeRemaining -= 5;
+            done2 = true;
+        }
+        if (player2.GetComponent<Level2Collision>().five == true && !done3)
+        {
+            timeRemaining += 10;
+            done3 = true;
+        }
+        if (player2.GetComponent<Level2Collision>().six == true && !done3)
+        {
+            timeRemaining += 5;
+            done3 = true;
+        }
+
+        if (player2.GetComponent<Level2Collision>().endLevel2 == true)
+        {
+            player2.SetActive(false);
+            level3map.SetActive(true);
+            level3 = true;
+        }
+
+        if(level3 == true)
+        {
+            level3Timer -= Time.deltaTime;
+
+            if(level3Timer <= 0)
+            {
+                tpAnim.SetActive(false);
+                tpAnim2.SetActive(false);
+            }
         }
     }
 }

@@ -74,4 +74,38 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Anomaly")
+        {
+            Time.timeScale = 0.5f;
+        }
+
+        if (other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.5f;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Anomaly")
+        {
+            Time.timeScale = 0.3f;
+        }
+
+        if (other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.7f;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Anomaly" || other.tag == "Anomaly2")
+        {
+            Time.timeScale = 1.0f;
+        }
+    }
 }

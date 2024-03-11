@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class HourglassSpawnLevel1 : MonoBehaviour
 {
+    public GameObject player1;
+    public GameObject player2;
+
+    public GameObject tpAnim;
+    public GameObject tpAnim2;
+
+    public bool nextLevel = false;
+    public float tpTime = 1f;
+
     public GameObject objectToSpawn;
     public Vector3 spawnArea;
     private GameObject currentObject;
@@ -39,9 +48,25 @@ public class HourglassSpawnLevel1 : MonoBehaviour
     void Update()
     {
         //Bir sonraki levela geç
-        if (hourglassCounter >= 5)
+        if (hourglassCounter >= 5 && nextLevel == false)
         {
+            player1.SetActive(false);
+            player2.SetActive(true);
 
+            nextLevel = true;
+        }
+
+        if(nextLevel)
+        {
+            tpTime -= Time.deltaTime;
+
+            if (tpTime <= 0)
+            {
+                tpAnim.SetActive(false);
+                tpAnim2.SetActive(false);
+
+                nextLevel = false;
+            }
         }
     }
 
