@@ -16,6 +16,8 @@ public class LevelChanger : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
 
         sceneName = currentScene.name;
+
+        Cursor.visible = false;
     }
 
 

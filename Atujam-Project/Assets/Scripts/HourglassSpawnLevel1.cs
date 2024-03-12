@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HourglassSpawnLevel1 : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class HourglassSpawnLevel1 : MonoBehaviour
 
     public GameObject level1;
     public GameObject boss;
+
+    public TMP_Text hourglassText;
+    public GameObject hourglassIcon;
 
     void Start()
     {
@@ -50,12 +54,16 @@ public class HourglassSpawnLevel1 : MonoBehaviour
 
     void Update()
     {
+        hourglassText.text = hourglassCounter.ToString();
+
         //Bir sonraki levela geç
         if (hourglassCounter >= 5 && nextLevel == false)
         {
             player1.SetActive(false);
             player2.SetActive(true);
             boss.SetActive(false);
+            hourglassText.enabled = false;
+            hourglassIcon.SetActive(false);
 
             nextLevel = true;
         }
