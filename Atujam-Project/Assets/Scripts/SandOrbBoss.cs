@@ -11,7 +11,7 @@ public class SandOrbBoss : MonoBehaviour
     public bool deadOrb = false;
     GameObject player;
 
-    public float orbLife = 16f;
+    public float orbLife = 10f;
 
     // Start is called before the first frame update
     void Start()

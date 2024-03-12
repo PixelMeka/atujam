@@ -21,6 +21,8 @@ public class Level2Collision : MonoBehaviour
     public GameObject kapi2;
     public GameObject kapi3;
 
+    public AudioSource gatePass;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,8 @@ public class Level2Collision : MonoBehaviour
             gate1 = true;
 
             one = true;
+
+            gatePass.Play();
         }
 
         if (other.tag == "-3") //-10
@@ -61,6 +65,8 @@ public class Level2Collision : MonoBehaviour
             gate1 = true;
 
             two = true;
+
+            gatePass.Play();
         }
 
         if (other.tag == "+3") //+15
@@ -68,6 +74,8 @@ public class Level2Collision : MonoBehaviour
             gate2 = true;
 
             three = true;
+
+            gatePass.Play();
         }
 
         if (other.tag == "x2") //-5
@@ -75,6 +83,8 @@ public class Level2Collision : MonoBehaviour
             gate2 = true;
 
             four = true;
+
+            gatePass.Play();
         }
 
         if (other.tag == "+4") //+10
@@ -82,6 +92,8 @@ public class Level2Collision : MonoBehaviour
             gate3 = true;
 
             five = true;
+
+            gatePass.Play();
         }
 
         if (other.tag == "-5") //+5
@@ -89,6 +101,8 @@ public class Level2Collision : MonoBehaviour
             gate3 = true;
 
             six = true;
+
+            gatePass.Play();
         }
 
         if(other.tag == "Hedef")

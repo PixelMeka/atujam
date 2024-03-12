@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Level3Controller : MonoBehaviour
 {
     public GameObject wave2;
     public GameObject wave3;
@@ -20,6 +20,8 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject playerTpAnim;
 
     public GameObject level4;
+
+    public bool levelFinal = false;
 
 
     // Start is called before the first frame update
@@ -56,6 +58,8 @@ public class NewBehaviourScript : MonoBehaviour
                 bossFinal.SetActive(true);
                 bossAnomalies.SetActive(true);
                 level4.SetActive(true);
+
+                levelFinal = true;
 
                 if (tpTime2 <= 0)
                 {

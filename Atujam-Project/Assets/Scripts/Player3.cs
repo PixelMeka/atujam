@@ -68,7 +68,7 @@ public class Player3 : MonoBehaviour
         }
 
         //Attack
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attacking == false)
         {
             t = Random.Range(1, 3);
             

@@ -5,12 +5,14 @@ using UnityEngine;
 public class RayOff : MonoBehaviour
 {
     public AudioSource deathSound;
+    public AudioSource raySound;
 
     public GameObject ray;
 
     void RayOn()
     {
         ray.SetActive(true);
+        raySound.Play();
     }
 
     void RayOfff()

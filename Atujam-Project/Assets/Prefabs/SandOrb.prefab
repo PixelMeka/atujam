@@ -106,7 +106,7 @@ MonoBehaviour:
   dead: 0
   explosion: {fileID: 2200714254469921328, guid: 188c1a92dc844e344989848537516fa8, type: 3}
   deadOrb: 0
-  orbLife: 15
+  orbLife: 10
 --- !u!135 &3522743188456664585
 SphereCollider:
   m_ObjectHideFlags: 0

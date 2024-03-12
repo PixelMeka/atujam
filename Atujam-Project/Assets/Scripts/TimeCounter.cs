@@ -10,12 +10,13 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 100;
     public float timeRemainingInt;
     public GameObject player;
+    public GameObject playerBoss;
     public GameObject playerbaby;
     public GameObject player2;
     public bool pleaseStop = false;
     public float stopTimer = 1;
     public bool pleaseStop2 = false;
-    public float stopTimer2 = 1;
+    public float stopTimer2 = 0.2f;
     public GameObject[] orbs;
     public bool orbPhase = false;
 
@@ -28,7 +29,7 @@ public class Timer : MonoBehaviour
 
     public float bossStunTimer = 0f;
 
-    public float orbTimer = 15f;
+    public float orbTimer = 10f;
 
     public TMP_Text timeText;
 
@@ -49,6 +50,11 @@ public class Timer : MonoBehaviour
     public AudioSource level4music;
     public AudioSource level4musicloop;
 
+    public AudioSource clockSound;
+    public GameObject alarmSound;
+
+    public GameObject level3Ctrl;
+
     void Start()
     {
         timeText = timeText.GetComponent<TextMeshProUGUI>();
@@ -63,6 +69,11 @@ public class Timer : MonoBehaviour
 
         timeRemainingInt = (int)timeRemaining;
         timeText.text = timeRemainingInt.ToString();
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
         if (timeRemaining > 0 && bossDead == false)
         {
@@ -82,15 +93,37 @@ public class Timer : MonoBehaviour
             timeText.enabled = false;
             bossAnomalies.SetActive(false);
             level4musicloop.Stop();
+            clockSound.Stop();
         }
 
-        if (player.GetComponent<PlayerStats>().hit == true && player.GetComponent<PlayerStats>().hitStopper == false)
+        if(timeRemaining <= 5)
         {
-            if (pleaseStop == false)
+            alarmSound.SetActive(true);
+        }
+
+        if(level3Ctrl.GetComponent<Level3Controller>().levelFinal == false)
+        {
+            if (player.GetComponent<PlayerStats>().hit == true && player.GetComponent<PlayerStats>().hitStopper == false)
             {
-                timeRemaining -= 5;
-                stopTimer = 1;
-                pleaseStop = true;
+                if (pleaseStop == false)
+                {
+                    timeRemaining -= 5;
+                    stopTimer = 1;
+                    pleaseStop = true;
+                }
+            }
+        }
+
+        if (level3Ctrl.GetComponent<Level3Controller>().levelFinal == true)
+        {
+            if (playerBoss.GetComponent<PlayerStats>().hit == true && playerBoss.GetComponent<PlayerStats>().hitStopper == false)
+            {
+                if (pleaseStop == false)
+                {
+                    timeRemaining -= 5;
+                    stopTimer = 1;
+                    pleaseStop = true;
+                }
             }
         }
 
@@ -98,8 +131,8 @@ public class Timer : MonoBehaviour
         {
             if (pleaseStop2 == false)
             {
-                timeRemaining += 20;
-                stopTimer2 = 1;
+                timeRemaining += 10;
+                stopTimer2 = 0.2f;
                 pleaseStop2 = true;
             }
         }
@@ -129,7 +162,7 @@ public class Timer : MonoBehaviour
         if (orbs.Length >= 5 && orbPhase == false)
         {
             orbPhase = true;
-            orbTimer = 15f;
+            orbTimer = 10f;
         }
 
         if(orbTimer > 0)

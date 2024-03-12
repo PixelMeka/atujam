@@ -35,7 +35,7 @@ public class BossCollider : MonoBehaviour
                 hit = false;
                 hitStopper = true;
                 hitTimer = 0;
-                hitTimer2 = 1;
+                hitTimer2 = 0.1f;
             }
         }
 

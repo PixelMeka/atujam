@@ -19,6 +19,7 @@ public class HourglassSpawnLevel1 : MonoBehaviour
     private int hourglassCounter = 0;
 
     public GameObject level1;
+    public GameObject boss;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class HourglassSpawnLevel1 : MonoBehaviour
         {
             player1.SetActive(false);
             player2.SetActive(true);
+            boss.SetActive(false);
 
             nextLevel = true;
         }

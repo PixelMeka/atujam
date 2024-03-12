@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
     public float hitTimer2 = 0;
     public float hitTimer3 = 0.5f;
 
+    public AudioSource hourglass;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,8 +89,7 @@ public class PlayerStats : MonoBehaviour
 
             if (endTimer <= 0)
             {
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+                SceneManager.LoadScene(4);
             }
         }
     }
@@ -122,9 +123,10 @@ public class PlayerStats : MonoBehaviour
             Time.timeScale = 1.5f;
         }
 
-        if (other.tag == "Hourglass")
+        if (other.tag == "Hourglass" && !end)
         {
             end = true;
+            hourglass.Play();
         }
     }
 

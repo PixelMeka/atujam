@@ -14,6 +14,7 @@ public class BossFinal : MonoBehaviour
     public GameObject point4;
     public GameObject point5;
     public bool orbed;
+    public AudioSource orbSound;
 
     public float timer = 5;
     public float timer2 = 0;
@@ -66,6 +67,7 @@ public class BossFinal : MonoBehaviour
 
             if(timer3 <= 0)
             {
+                orbSound.Play();
                 var orb = Instantiate(sandOrb, point1.transform.position, point1.transform.rotation);
                 var orb2 = Instantiate(sandOrb, point2.transform.position, point2.transform.rotation);
                 var orb3 = Instantiate(sandOrb, point3.transform.position, point3.transform.rotation);
